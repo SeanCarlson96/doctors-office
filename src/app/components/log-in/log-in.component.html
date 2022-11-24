@@ -1,1 +1,22 @@
-<p>log-in works!</p>
+<h2>Register</h2>
+<select #registerRole (change)="registeredRole(registerRole.value)">
+    <option default>Select a role</option>
+    <option>Doctor</option>
+    <option>Patient</option>
+</select>
+<input type="text" placeholder="Name" #registerName (keyup)="registeredName(registerName.value)"/>
+<input type="text" placeholder="username" #registerUsername (keyup)="registeredUsername(registerUsername.value)"/>
+<input type="text" placeholder="password" #registerPassword (keyup)="registeredPassword(registerPassword.value)"/>
+<button (click)="onRegister()">Register</button>
+
+<p>{{ resultMessage }}</p>
+<br><br>
+
+<h2>Log In</h2>
+<select #role>
+    <option>Doctor</option>
+    <option>Patient</option>
+</select>
+<input type="text" placeholder="username" #username/>
+<input type="text" placeholder="password" #password/>
+<button>Log In</button>

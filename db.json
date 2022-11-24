@@ -1,7 +1,21 @@
 {
-    "thing": [
-        {
-            "hello": "message"
-        }
-    ]
+  "doctors": [
+    {
+      "id": 0.2357027650813024,
+      "name": "test",
+      "availability": null,
+      "appointments": null,
+      "username": "test",
+      "password": "test"
+    }
+  ],
+  "patients": [
+    {
+      "id": 0.4052878223753231,
+      "name": "",
+      "appointments": null,
+      "username": "",
+      "password": ""
+    }
+  ]
 }
