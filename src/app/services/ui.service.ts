@@ -10,6 +10,8 @@ import { Observable, Subject, take } from 'rxjs';
 export class UiService {
   public doctors: Doctor[] = []
   public patients: Patient[] = []
+  public currentUser: Doctor | Patient | null = null
+  public userRole: string | null = null
   private doctorsSubject: Subject<Doctor[]> = new Subject()
   private patientsSubject: Subject<Patient[]> = new Subject()
   private http: HttpClient
@@ -55,5 +57,31 @@ export class UiService {
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
     this.patients.push(patient)
+  }
+
+  private logIn: () => void = (): void => {return};
+  loggingIn(fn: () => void) {
+    this.logIn = fn
+  }
+
+  checkCredentials(role: string, username: string, password: string) {
+    if(role === 'Doctor'){
+      for(let i = 0; i < this.doctors.length; i++){
+        if(this.doctors[i].username === username && this.doctors[i].password === password){
+          this.currentUser = this.doctors[i]
+          this.userRole = 'Doctor'
+          this.logIn()
+        }
+      }
+    } else if (role === 'Patient'){
+      for(let i = 0; i < this.patients.length; i++){
+        if(this.patients[i].username === username && this.patients[i].password === password){
+          this.currentUser = this.patients[i]
+          this.userRole = 'Patient'
+          this.logIn()
+          console.log('guy')
+        }
+      }
+    } else {console.log('error' + role + " " + username + " " + password)}
   }
 }

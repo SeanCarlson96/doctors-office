@@ -7,6 +7,22 @@
       "appointments": null,
       "username": "test",
       "password": "test"
+    },
+    {
+      "id": 0.2969928528379764,
+      "name": "",
+      "availability": null,
+      "appointments": null,
+      "username": "",
+      "password": ""
+    },
+    {
+      "id": 0.9547896763154755,
+      "name": "test",
+      "availability": null,
+      "appointments": null,
+      "username": "test",
+      "password": "test54"
     }
   ],
   "patients": [
@@ -16,6 +32,13 @@
       "appointments": null,
       "username": "",
       "password": ""
+    },
+    {
+      "id": 0.7897354870055759,
+      "name": "sean",
+      "appointments": null,
+      "username": "sc",
+      "password": "96"
     }
   ]
 }

@@ -13,10 +13,11 @@
 <br><br>
 
 <h2>Log In</h2>
-<select #role>
+<select #liRole (change)="setRole(liRole.value)">
+    <option default>Select a role</option>
     <option>Doctor</option>
     <option>Patient</option>
 </select>
-<input type="text" placeholder="username" #username/>
-<input type="text" placeholder="password" #password/>
-<button>Log In</button>
+<input type="text" placeholder="username" #liUsername (keyup)="setUsername(liUsername.value)"/>
+<input type="text" placeholder="password" #liPassword (keyup)="setPassword(liPassword.value)"/>
+<button (click)="onLogIn()">Log In</button>

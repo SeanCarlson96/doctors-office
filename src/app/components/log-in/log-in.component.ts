@@ -20,6 +20,10 @@ export class LogInComponent {
 
   private ui: UiService
 
+  public liRole: string = ''
+  public liUsername: string = ''
+  public liPassword: string = ''
+
   constructor(ui: UiService){
     this.ui = ui
   }
@@ -65,19 +69,30 @@ export class LogInComponent {
         ...this.doctor,
         id: Math.random(),
       })
-      this.resultMessage = 'Doctor successfully registered';
-      console.log('Doctor successfully registered')
+      this.resultMessage = 'Doctor successfully registered. Please log in.';
     } else if(this.role === 'Patient'){
       this.ui.addPatient({
         ...this.patient,
         id: Math.random(),
       })
-      this.resultMessage = 'Patient successfully registered';
-      console.log('Patient successfully registered')
+      this.resultMessage = 'Patient successfully registered. Please log in.';
     } else {
       this.resultMessage = 'Something went wrong';
-      console.log('Something went wrong')
     }
     this.clearInputs()
+  }
+
+
+  setRole(liRole: string) {
+    this.liRole = liRole
+  }
+  setUsername(liUsername: string) {
+    this.liUsername = liUsername
+  }
+  setPassword(liPassword: string) {
+    this.liPassword = liPassword
+  }
+  onLogIn() {
+    this.ui.checkCredentials(this.liRole, this.liUsername, this.liPassword)
   }
 }

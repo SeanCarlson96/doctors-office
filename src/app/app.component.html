@@ -1,2 +1,5 @@
 <h1>Hello</h1>
-<app-log-in></app-log-in>
+<app-log-in *ngIf="notLoggedIn"></app-log-in>
+<p *ngIf="notLoggedIn === false">Logged in baby!</p>
+<app-doctor *ngIf="userRole === 'Doctor'"></app-doctor>
+<app-patient *ngIf="userRole === 'Patient'"></app-patient>
