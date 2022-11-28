@@ -8,7 +8,7 @@ import { Availability } from 'src/data/availability';
   styleUrls: ['./avail-chunk.component.css']
 })
 export class AvailChunkComponent {
-  @Input() achunk: Availability = new Availability(-1, null, null)
+  @Input() achunk: Availability = new Availability(-1, new Date(), new Date())
   private ui: UiService
 
   constructor(ui: UiService) {

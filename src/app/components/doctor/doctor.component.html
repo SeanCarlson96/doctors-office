@@ -1,5 +1,5 @@
 <button (click)="logout()">Log Out</button>
-<p>Hello Doctor {{doctor.username}}</p>
+<p>Hello Doctor {{doctor.name}}</p>
 
 
 <div>
@@ -18,9 +18,6 @@
 
 <div>
     <h3>My Appointments</h3>
-    {{doctor.appointments}}
-</div>
-<div>
-    <h3>Appointment Requests</h3>
-    {{doctor}}
+    <app-appt-block *ngFor="let block of appointments"
+    [ablock]="block"></app-appt-block>
 </div>

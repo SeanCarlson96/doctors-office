@@ -1,9 +1,9 @@
 export class Availability {
     public id: number
-    public startTime: Date | null
-    public endTime: Date | null
+    public startTime: Date
+    public endTime: Date
 
-    constructor(id: number, startTime: Date | null, endTime: Date | null){
+    constructor(id: number, startTime: Date, endTime: Date){
         this.id = id
         this.startTime = startTime
         this.endTime = endTime

@@ -6,6 +6,8 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { AvailChunkComponent } from './components/avail-chunk/avail-chunk.component';
+import { ApptBlockComponent } from './components/appt-block/appt-block.component';
+import { AvailApptsComponent } from './components/avail-appts/avail-appts.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { AvailChunkComponent } from './components/avail-chunk/avail-chunk.compon
     LogInComponent,
     DoctorComponent,
     PatientComponent,
-    AvailChunkComponent
+    AvailChunkComponent,
+    ApptBlockComponent,
+    AvailApptsComponent
   ],
   imports: [
     BrowserModule,

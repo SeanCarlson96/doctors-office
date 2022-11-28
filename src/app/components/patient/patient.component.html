@@ -1,2 +1,12 @@
 <button (click)="logout()">Log Out</button>
-<p>{{patient?.username}}</p>
+<p>Hello {{patient.name}}</p>
+
+<div>
+    <h3>My Appointments</h3>
+    <app-appt-block *ngFor="let block of appointments"
+    [ablock]="block"></app-appt-block>
+
+    <h5>Available Appointment Times</h5>
+    <app-avail-appts *ngFor="let appt of availAppts"
+    [anappt]="appt"></app-avail-appts>
+</div>
