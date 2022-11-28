@@ -14,8 +14,8 @@ export class LogInComponent {
   @ViewChild('registerUsername') registerUsername: ElementRef = {} as ElementRef;
   @ViewChild('registerPassword') registerPassword: ElementRef = {} as ElementRef;
   resultMessage = ''
-  public doctor: Doctor = new Doctor(-1, '', null, null, '', '')
-  public patient: Patient = new Patient(-1, '', null, '', '')
+  public doctor: Doctor = new Doctor(-1, '', [], [], '', '')
+  public patient: Patient = new Patient(-1, '', [], [], '', '')
   public role: string = ''
 
   private ui: UiService

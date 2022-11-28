@@ -1,44 +1,27 @@
 {
   "doctors": [
     {
-      "id": 0.2357027650813024,
-      "name": "test",
-      "availability": null,
-      "appointments": null,
-      "username": "test",
-      "password": "test"
+      "availability": [
+        {
+          "id": 0.28855727197909564,
+          "startTime": "2022-11-29T02:10:00.000Z",
+          "endTime": "2022-11-29T03:10:00.000Z"
+        }
+      ],
+      "appointments": [],
+      "id": 0.10118015550294457,
+      "name": "we",
+      "username": "we",
+      "password": "we"
     },
     {
-      "id": 0.2969928528379764,
-      "name": "",
-      "availability": null,
-      "appointments": null,
-      "username": "",
-      "password": ""
-    },
-    {
-      "id": 0.9547896763154755,
-      "name": "test",
-      "availability": null,
-      "appointments": null,
-      "username": "test",
-      "password": "test54"
+      "availability": [],
+      "appointments": [],
+      "id": 0.6234407460219153,
+      "name": "t",
+      "username": "t",
+      "password": "t"
     }
   ],
-  "patients": [
-    {
-      "id": 0.4052878223753231,
-      "name": "",
-      "appointments": null,
-      "username": "",
-      "password": ""
-    },
-    {
-      "id": 0.7897354870055759,
-      "name": "sean",
-      "appointments": null,
-      "username": "sc",
-      "password": "96"
-    }
-  ]
+  "patients": []
 }

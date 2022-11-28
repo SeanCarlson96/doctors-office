@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { PatientComponent } from './components/patient/patient.component';
+import { AvailChunkComponent } from './components/avail-chunk/avail-chunk.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
     DoctorComponent,
-    PatientComponent
+    PatientComponent,
+    AvailChunkComponent
   ],
   imports: [
     BrowserModule,

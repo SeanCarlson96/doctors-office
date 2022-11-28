@@ -17,10 +17,11 @@ export class AppComponent implements OnInit{
 
   constructor(ui: UiService){
     this.ui = ui
-    this.user = ui.currentUser
-    if(this.user != null){
-      this.notLoggedIn = false
-    }
+    this.user = null
+    // this.user = ui.currentUser
+    // if(this.user != null){
+    //   this.notLoggedIn = false
+    // }
   }
 
   ngOnInit(): void {
@@ -31,6 +32,12 @@ export class AppComponent implements OnInit{
     this.user = this.ui.currentUser
     this.notLoggedIn = false
     this.userRole = this.ui.userRole
+  }
+
+  logout(){
+    this.notLoggedIn = true
+    this.userRole = null
+    this.user = null
   }
 
 }

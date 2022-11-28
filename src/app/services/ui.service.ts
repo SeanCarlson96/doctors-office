@@ -3,6 +3,7 @@ import { Doctor } from 'src/data/doctor';
 import { Patient } from 'src/data/patient';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, take } from 'rxjs';
+import { Availability } from 'src/data/availability';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,12 @@ import { Observable, Subject, take } from 'rxjs';
 export class UiService {
   public doctors: Doctor[] = []
   public patients: Patient[] = []
-  public currentUser: Doctor | Patient | null = null
+  public currentUser: Doctor | Patient = new Doctor(-1, '', [], [], '', '')
   public userRole: string | null = null
   private doctorsSubject: Subject<Doctor[]> = new Subject()
   private patientsSubject: Subject<Patient[]> = new Subject()
   private http: HttpClient
+  private availSubject: Subject<Availability[]> = new Subject()
 
   constructor(http: HttpClient) {
     this.http = http
@@ -79,9 +81,38 @@ export class UiService {
           this.currentUser = this.patients[i]
           this.userRole = 'Patient'
           this.logIn()
-          console.log('guy')
         }
       }
-    } else {console.log('error' + role + " " + username + " " + password)}
+    } else {console.log('error')}
+  }
+
+  addBlock(block: Availability): void{
+    this.currentUser.availability.push(block)
+    let updateDocAvail: Doctor = 
+    new Doctor(this.currentUser.id, this.currentUser.name, 
+      this.currentUser.availability, this.currentUser.appointments, 
+      this.currentUser.username, this.currentUser.password)
+
+    this.http
+      .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAvail)
+      .pipe(take(1))
+      .subscribe(() => this.updateDoctors())
+  }
+
+  whenAvailUpdates(): Observable<Availability[]>{
+    return this.availSubject.asObservable()
+  }
+
+  deleteAvailById(block: Availability){
+    let index = this.currentUser.availability.indexOf(block)
+    this.currentUser.availability.splice(index, 1)
+    let updateDocAvail: Doctor = 
+    new Doctor(this.currentUser.id, this.currentUser.name, 
+      this.currentUser.availability, this.currentUser.appointments, 
+      this.currentUser.username, this.currentUser.password)
+    this.http
+      .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAvail)
+      .pipe(take(1))
+      .subscribe(() => this.updateDoctors())
   }
 }

@@ -1,15 +1,18 @@
 import { Appointment } from "./appointment"
+import { Availability } from "./availability"
 
 export class Patient {
     public id: number
     public name: string
-    public appointments: Appointment | null
+    public availability: Availability[] = []
+    public appointments: Appointment[] = []
     public username: string
     public password: string
-
-    constructor(id: number, name: string, appointments: Appointment | null, username: string, password: string){
+ 
+    constructor(id: number, name: string, availability: Availability[], appointments: Appointment[], username: string, password: string){
         this.id = id
         this.name = name
+        this.availability = availability
         this.appointments = appointments
         this.username = username
         this.password = password
