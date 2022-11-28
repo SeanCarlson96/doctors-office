@@ -13,7 +13,7 @@ export class UiService {
   public doctors: Doctor[] = []
   public patients: Patient[] = []
   public currentUser: Doctor | Patient = new Doctor(-1, '', [], [], '', '')
-  public userRole: string | null = null
+  public userRole: string = ''
   private doctorsSubject: Subject<Doctor[]> = new Subject()
   private patientsSubject: Subject<Patient[]> = new Subject()
   private http: HttpClient
@@ -22,6 +22,8 @@ export class UiService {
   private availApptSubject: Subject<Appointment[]> = new Subject()
   public apptDoctor: Doctor = new Doctor(-1, '', [], [], '', '')
   public allAvail: Appointment[] = []
+  public pat: Patient = new Patient(-1, '', [], [], '', '')
+  public doc: Doctor = new Doctor(-1, '', [], [], '', '')
 
   constructor(http: HttpClient) {
     this.http = http
@@ -136,8 +138,27 @@ export class UiService {
       .subscribe(() => this.updateDoctors())
   }
 
-  
-  deleteApptById(block: Appointment){
+
+  findParties(role: string, appt: Appointment): void{
+    if(role === 'Patient'){
+      for(let i = 0; i < this.doctors.length; i++){
+        let doctor = this.doctors[i]
+        if(doctor.name = appt.doctor){
+          this.doc = new Doctor(doctor.id, doctor.name, doctor.availability, doctor.appointments, doctor.username, doctor.password)
+        }
+      }
+    } else if (role === 'Doctor'){
+      for(let i = 0; i < this.patients.length; i++){
+        let patient = this.patients[i]
+        if(patient.name = appt.patient){
+          this.pat = new Patient(patient.id, patient.name, patient.availability, patient.appointments, patient.username, patient.password)
+        }
+      }
+    } else {console.log('error')}
+  }
+
+  deleteApptByIdDoc(block: Appointment){
+    this.findParties(this.userRole, block)
     let index = this.currentUser.appointments.indexOf(block)
     this.currentUser.appointments.splice(index, 1)
     let updateDocAppt: Doctor = 
@@ -148,9 +169,43 @@ export class UiService {
       .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAppt)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
+    let index2 = this.pat.appointments.indexOf(block)
+    this.pat.appointments.splice(index2, 1)
+    let updatePatAppt: Patient = 
+    new Patient(this.pat.id, this.pat.name, 
+      this.pat.availability, this.pat.appointments, 
+      this.pat.username, this.pat.password)
+    this.http
+      .patch('http://localhost:3000/patients/' + this.pat?.id, updatePatAppt)
+      .pipe(take(1))
+      .subscribe(() => this.updatePatients())
+  }
+  deleteApptByIdPat(block: Appointment){
+    this.findParties(this.userRole, block)
+    let index = this.doc.appointments.indexOf(block)
+    this.doc.appointments.splice(index, 1)
+    let updateDocAppt: Doctor = 
+    new Doctor(this.doc.id, this.doc.name, 
+      this.doc.availability, this.doc.appointments, 
+      this.doc.username, this.doc.password)
+    this.http
+      .patch('http://localhost:3000/doctors/' + this.doc?.id, updateDocAppt)
+      .pipe(take(1))
+      .subscribe(() => this.updateDoctors())
+    let index2 = this.currentUser.appointments.indexOf(block)
+    this.currentUser.appointments.splice(index2, 1)
+    let updatePatAppt: Patient = 
+    new Patient(this.currentUser.id, this.currentUser.name, 
+      this.currentUser.availability, this.currentUser.appointments, 
+      this.currentUser.username, this.currentUser.password)
+    this.http
+      .patch('http://localhost:3000/patients/' + this.currentUser?.id, updatePatAppt)
+      .pipe(take(1))
+      .subscribe(() => this.updatePatients())
   }
 
   confirmAppt(block: Appointment){
+    this.findParties(this.userRole, block)
     let index = this.currentUser.appointments.indexOf(block)
     this.currentUser.appointments[index].confirmed = true
     let updateDocAppt: Doctor = 
@@ -161,9 +216,20 @@ export class UiService {
       .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAppt)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
+    let index2 = this.pat.appointments.indexOf(block)
+    this.pat.appointments[index2].confirmed = true
+    let updatePatAppt: Patient = 
+    new Patient(this.pat.id, this.pat.name, 
+      this.pat.availability, this.pat.appointments, 
+      this.pat.username, this.pat.password)
+    this.http
+      .patch('http://localhost:3000/patients/' + this.pat?.id, updatePatAppt)
+      .pipe(take(1))
+      .subscribe(() => this.updatePatients())
   }
 
   addApptToUsers(appt: Appointment){
+    this.findParties(this.userRole, appt)
     this.currentUser.appointments.push(appt)
     let updatePatAppts: Patient = new Patient(this.currentUser.id, this.currentUser.name, 
       this.currentUser.availability, this.currentUser.appointments, 
@@ -172,21 +238,14 @@ export class UiService {
       .patch('http://localhost:3000/patients/' + this.currentUser?.id, updatePatAppts)
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
-
-    //push appt into appt array for doctor where appt doctor name = doctor name
+    this.doc.appointments.push(appt)
+    let updatedocAppts: Doctor = new Doctor(this.doc.id, this.doc.name, 
+      this.doc.availability, this.doc.appointments, 
+      this.doc.username, this.doc.password)
     this.http
-      .get<Doctor>('http://localhost:3000/doctors/' + appt.doctor)
-      .pipe(take(1))
-      .subscribe(doctor => {
-        this.apptDoctor = doctor
-      })
-    this.apptDoctor.appointments.push(appt)
-    let updateApptDoctor: Doctor = new Doctor(this.apptDoctor.id, this.apptDoctor.name, 
-      this.apptDoctor.availability, this.apptDoctor.appointments, 
-      this.apptDoctor.username, this.apptDoctor.password)
-    this.http
-      .patch('http://localhost:3000/doctors/' + this.apptDoctor.id, updateApptDoctor)
+      .patch('http://localhost:3000/doctors/' + this.doc?.id, updatedocAppts)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
+
   }
 }

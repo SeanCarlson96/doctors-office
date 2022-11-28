@@ -19,8 +19,11 @@ export class ApptBlockComponent {
     }
    }
 
-  deleteAppt(){
-    this.ui.deleteApptById(this.ablock)
+  deleteApptDoc(){
+    this.ui.deleteApptByIdDoc(this.ablock)
+  }
+  deleteApptPat(){
+    this.ui.deleteApptByIdPat(this.ablock)
   }
 
   confirmAppt(){

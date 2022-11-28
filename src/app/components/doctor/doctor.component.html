@@ -7,7 +7,7 @@
     <app-avail-chunk *ngFor="let chunk of availability"
     [achunk]="chunk"></app-avail-chunk>
 
-    <h5>Add New Availability</h5>
+    <h4>Add New Availability</h4>
     <input placeholder="start" type="datetime-local" #start (change)="newStart(start.value)"/>
     <input placeholder="end" type="datetime-local" #end (change)="newEnd(end.value)"/>
     <button (click)="addChunk()">Add</button>

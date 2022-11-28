@@ -32,6 +32,7 @@ export class DoctorComponent implements OnInit, OnDestroy {
     this.apptSubscription = ui
       .whenApptUpdates()
       .subscribe(appointments => this.appointments = appointments)
+    console.log(this.appointments)
   }
 
   ngOnInit(): void { }

@@ -5,7 +5,7 @@
     <p>End Time: {{ablock.end}}</p>
     <p *ngIf="ablock.confirmed">Confirmed</p>
     <p *ngIf="ablock.confirmed === false">unconfirmed</p>
-    <button (click)="deleteAppt()">Cancel</button>
+    <button (click)="deleteApptDoc()">Cancel</button>
     <button *ngIf="ablock.confirmed === false" (click)="confirmAppt()">Confirm</button>
 </div>
 
@@ -16,5 +16,5 @@
     <p>End Time: {{ablock.end}}</p>
     <p *ngIf="ablock.confirmed">Confirmed</p>
     <p *ngIf="ablock.confirmed === false">unconfirmed</p>
-    <button (click)="deleteAppt()">Cancel</button>
+    <button (click)="deleteApptPat()">Cancel</button>
 </div>
