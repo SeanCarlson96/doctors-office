@@ -8,6 +8,7 @@ import { PatientComponent } from './components/patient/patient.component';
 import { AvailChunkComponent } from './components/avail-chunk/avail-chunk.component';
 import { ApptBlockComponent } from './components/appt-block/appt-block.component';
 import { AvailApptsComponent } from './components/avail-appts/avail-appts.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AvailApptsComponent } from './components/avail-appts/avail-appts.compon
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

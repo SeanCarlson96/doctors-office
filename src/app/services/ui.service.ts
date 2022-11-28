@@ -159,6 +159,10 @@ export class UiService {
 
   deleteApptByIdDoc(block: Appointment){
     this.findParties(this.userRole, block)
+
+    //push availability chunk back into doctor availability
+    this.currentUser.availability.push(new Availability(Math.random(), block.start, block.end))
+
     let index = this.currentUser.appointments.indexOf(block)
     this.currentUser.appointments.splice(index, 1)
     let updateDocAppt: Doctor = 
@@ -179,9 +183,14 @@ export class UiService {
       .patch('http://localhost:3000/patients/' + this.pat?.id, updatePatAppt)
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
+    this.updateAllAvail()
   }
   deleteApptByIdPat(block: Appointment){
     this.findParties(this.userRole, block)
+
+    //push availability chunk back into doctor availability
+    this.doc.availability.push(new Availability(Math.random(), block.start, block.end))
+
     let index = this.doc.appointments.indexOf(block)
     this.doc.appointments.splice(index, 1)
     let updateDocAppt: Doctor = 
@@ -216,8 +225,12 @@ export class UiService {
       .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAppt)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
-    let index2 = this.pat.appointments.indexOf(block)
-    this.pat.appointments[index2].confirmed = true
+
+    for(let i = 0; i<this.pat.appointments.length; i++){
+      if(this.pat.appointments[i].id === block.id){
+        this.pat.appointments[i].confirmed = true
+      }
+    }
     let updatePatAppt: Patient = 
     new Patient(this.pat.id, this.pat.name, 
       this.pat.availability, this.pat.appointments, 
@@ -231,6 +244,7 @@ export class UiService {
   addApptToUsers(appt: Appointment){
     this.findParties(this.userRole, appt)
     this.currentUser.appointments.push(appt)
+    appt.patient = this.currentUser.name
     let updatePatAppts: Patient = new Patient(this.currentUser.id, this.currentUser.name, 
       this.currentUser.availability, this.currentUser.appointments, 
       this.currentUser.username, this.currentUser.password)
@@ -238,6 +252,15 @@ export class UiService {
       .patch('http://localhost:3000/patients/' + this.currentUser?.id, updatePatAppts)
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
+
+    //remove appt from doctors availability
+    //find avaiability by using appt.start and appt.end find where both match
+    for(let i = 0; i < this.doc.availability.length; i++){
+      if(this.doc.availability[i].startTime === appt.start && this.doc.availability[i].endTime === appt.end){
+        this.doc.availability.splice(i, 1)
+      }
+    }
+
     this.doc.appointments.push(appt)
     let updatedocAppts: Doctor = new Doctor(this.doc.id, this.doc.name, 
       this.doc.availability, this.doc.appointments, 
@@ -247,5 +270,6 @@ export class UiService {
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
 
+    this.updateAllAvail()
   }
 }

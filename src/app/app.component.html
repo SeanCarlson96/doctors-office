@@ -1,4 +1,6 @@
-<h1>Doctor's Office</h1>
+<header>
+    <h1>Doctor's Office</h1>
+</header>
 <app-log-in *ngIf="notLoggedIn"></app-log-in>
 <p *ngIf="notLoggedIn === false">Logged in!</p>
 <app-doctor *ngIf="userRole === 'Doctor'" (close)="logout()"></app-doctor>
