@@ -1,35 +1,91 @@
-<h2>Register</h2>
-<select #registerRole (change)="registeredRole(registerRole.value)">
-    <option default>Select a role</option>
-    <option>Doctor</option>
-    <option>Patient</option>
-</select>
-<input type="text" placeholder="Name" #registerName (keyup)="registeredName(registerName.value)"/>
-<input type="text" placeholder="username" #registerUsername (keyup)="registeredUsername(registerUsername.value)"/>
-<input type="text" placeholder="password" #registerPassword (keyup)="registeredPassword(registerPassword.value)"/>
-<button (click)="onRegister()">Register</button>
+<div class="contain">
 
-<p>{{ resultMessage }}</p>
-<br><br>
-
-<h2>Log In</h2>
-<select #liRole (change)="setRole(liRole.value)">
-    <option default>Select a role</option>
-    <option>Doctor</option>
-    <option>Patient</option>
-</select>
-<input type="text" placeholder="username" #liUsername (keyup)="setUsername(liUsername.value)"/>
-<input type="text" placeholder="password" #liPassword (keyup)="setPassword(liPassword.value)"/>
-<button (click)="onLogIn()">Log In</button>
-
-<!-- <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Favorite food</mat-label>
-      <input matInput placeholder="Ex. Pizza" value="Sushi">
+  <mat-card class="card">
+    <mat-card-header>
+      <h2>Register</h2>
+    </mat-card-header>
+    <mat-form-field>
+      <mat-label>Select</mat-label>
+       <!-- <mat-select #registerRole
+       (change)="registeredRole(registerRole.value)"> -->
+       <mat-select #registerRole [(ngModel)]="role">
+        <mat-option default value="Select a role">Select a role</mat-option>
+        <mat-option value="Doctor">Doctor</mat-option>
+        <mat-option value="Patient">Patient</mat-option>
+      </mat-select>
     </mat-form-field>
-  
-    <mat-form-field class="example-full-width">
-      <mat-label>Leave a comment</mat-label>
-      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    <p>{{role}}</p>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Name"
+        #registerName
+        (keyup)="registeredName(registerName.value)"
+      />
     </mat-form-field>
-  </form> -->
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="username"
+        #registerUsername
+        (keyup)="registeredUsername(registerUsername.value)"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="password"
+        #registerPassword
+        (keyup)="registeredPassword(registerPassword.value)"
+      />
+    </mat-form-field>
+  <button mat-flat-button color="primary"
+  (click)="onRegister()">Register</button>
+  <p>{{ resultMessage }}</p>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-header>
+      <h2>Log In</h2>
+    </mat-card-header>
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <!-- <mat-select #liRole (change)="setRole(liRole.value)"> -->
+      <mat-select [(ngModel)]="liRole">
+      <mat-option default value="Select a role">Select a role</mat-option>
+      <mat-option value="Doctor">Doctor</mat-option>
+      <mat-option value="Patient">Patient</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>{{liRole}}</p>
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="username"
+      #liUsername
+      (keyup)="setUsername(liUsername.value)"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="password"
+      placeholder="password"
+      #liPassword
+      (keyup)="setPassword(liPassword.value)"
+    />
+  </mat-form-field>
+
+  <button mat-flat-button color="accent" (click)="onLogIn()">Log In</button>
+  </mat-card>
+
+</div>

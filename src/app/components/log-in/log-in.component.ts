@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 import { Doctor } from 'src/data/doctor';
 import { Patient } from 'src/data/patient';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-log-in',
@@ -9,7 +10,7 @@ import { Patient } from 'src/data/patient';
   styleUrls: ['./log-in.component.css']
 })
 export class LogInComponent {
-  @ViewChild('registerRole') registerRole: ElementRef = {} as ElementRef;
+  // @ViewChild('registerRole') registerRole: ElementRef = {} as ElementRef;
   @ViewChild('registerName') registerName: ElementRef = {} as ElementRef;
   @ViewChild('registerUsername') registerUsername: ElementRef = {} as ElementRef;
   @ViewChild('registerPassword') registerPassword: ElementRef = {} as ElementRef;
@@ -28,9 +29,9 @@ export class LogInComponent {
     this.ui = ui
   }
 
-  registeredRole(registerRole: string): void {
-    this.role = registerRole
-  }
+  // registeredRole(registerRole: string): void {
+  //   this.role = registerRole
+  // }
 
   registeredName(registerName: string): void {
     if(this.role === 'Doctor'){
@@ -57,13 +58,15 @@ export class LogInComponent {
   }
 
   clearInputs(){
-    this.registerRole.nativeElement.value = 'Select a role';
+    this.role = ''
+    // this.registerRole.nativeElement.value = 'Select a role';
     this.registerName.nativeElement.value = '';
     this.registerUsername.nativeElement.value = '';
     this.registerPassword.nativeElement.value = '';
  }
 
   onRegister() {
+    console.log(this.role)
     if(this.role === 'Doctor'){
       this.ui.addDoctor({
         ...this.doctor,
@@ -83,9 +86,9 @@ export class LogInComponent {
   }
 
 
-  setRole(liRole: string) {
-    this.liRole = liRole
-  }
+  // setRole(liRole: string) {
+  //   this.liRole = liRole
+  // }
   setUsername(liUsername: string) {
     this.liUsername = liUsername
   }

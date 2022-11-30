@@ -1,0 +1,12 @@
+.card {
+    width: 400px;
+    margin: auto;
+    margin-top: 1rem;
+}
+.contain {
+    display: flex;
+    flex-wrap: wrap;
+}
+.card-header {
+    padding: 3px;
+}
