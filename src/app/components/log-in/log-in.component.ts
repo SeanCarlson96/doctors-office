@@ -66,7 +66,6 @@ export class LogInComponent {
  }
 
   onRegister() {
-    console.log(this.role)
     if(this.role === 'Doctor'){
       this.ui.addDoctor({
         ...this.doctor,

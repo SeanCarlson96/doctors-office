@@ -33,7 +33,7 @@ export class UiService {
 
   updateDoctors(): void {
     this.http
-      .get<Doctor[]>('http://localhost:3000/doctors')
+      .get<Doctor[]>('http://localhost:8080/doctors')
       .pipe(take(1))
       .subscribe(doctors => {
         this.doctors = doctors
@@ -43,7 +43,7 @@ export class UiService {
 
   updatePatients(): void {
     this.http
-      .get<Patient[]>('http://localhost:3000/patients')
+      .get<Patient[]>('http://localhost:8080/patients')
       .pipe(take(1))
       .subscribe(patients => {
         this.patients = patients
@@ -63,7 +63,7 @@ export class UiService {
 
   addDoctor(doctor: Doctor){
     this.http
-      .post('http://localhost:3000/doctors', doctor)
+      .post('http://localhost:8080/doctors', doctor)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
     this.doctors.push(doctor)
@@ -71,7 +71,7 @@ export class UiService {
 
   addPatient(patient: Patient){
     this.http
-      .post('http://localhost:3000/patients', patient)
+      .post('http://localhost:8080/patients', patient)
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
     this.patients.push(patient)
@@ -110,7 +110,7 @@ export class UiService {
       this.currentUser.username, this.currentUser.password)
 
     this.http
-      .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAvail)
+      .patch(`http://localhost:8080/doctors/${this.currentUser.id}`, updateDocAvail)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
   }
@@ -133,7 +133,7 @@ export class UiService {
       this.currentUser.availability, this.currentUser.appointments, 
       this.currentUser.username, this.currentUser.password)
     this.http
-      .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAvail)
+      .patch('http://localhost:8080/doctors/' + this.currentUser?.id, updateDocAvail)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
   }
@@ -170,7 +170,7 @@ export class UiService {
       this.currentUser.availability, this.currentUser.appointments, 
       this.currentUser.username, this.currentUser.password)
     this.http
-      .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAppt)
+      .patch('http://localhost:8080/doctors/' + this.currentUser?.id, updateDocAppt)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
     let index2 = this.pat.appointments.indexOf(block)
@@ -180,7 +180,7 @@ export class UiService {
       this.pat.availability, this.pat.appointments, 
       this.pat.username, this.pat.password)
     this.http
-      .patch('http://localhost:3000/patients/' + this.pat?.id, updatePatAppt)
+      .patch('http://localhost:8080/patients/' + this.pat?.id, updatePatAppt)
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
     this.updateAllAvail()
@@ -198,7 +198,7 @@ export class UiService {
       this.doc.availability, this.doc.appointments, 
       this.doc.username, this.doc.password)
     this.http
-      .patch('http://localhost:3000/doctors/' + this.doc?.id, updateDocAppt)
+      .patch('http://localhost:8080/doctors/' + this.doc?.id, updateDocAppt)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
     let index2 = this.currentUser.appointments.indexOf(block)
@@ -208,7 +208,7 @@ export class UiService {
       this.currentUser.availability, this.currentUser.appointments, 
       this.currentUser.username, this.currentUser.password)
     this.http
-      .patch('http://localhost:3000/patients/' + this.currentUser?.id, updatePatAppt)
+      .patch('http://localhost:8080/patients/' + this.currentUser?.id, updatePatAppt)
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
   }
@@ -222,7 +222,7 @@ export class UiService {
       this.currentUser.availability, this.currentUser.appointments, 
       this.currentUser.username, this.currentUser.password)
     this.http
-      .patch('http://localhost:3000/doctors/' + this.currentUser?.id, updateDocAppt)
+      .patch('http://localhost:8080/doctors/' + this.currentUser?.id, updateDocAppt)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
 
@@ -236,7 +236,7 @@ export class UiService {
       this.pat.availability, this.pat.appointments, 
       this.pat.username, this.pat.password)
     this.http
-      .patch('http://localhost:3000/patients/' + this.pat?.id, updatePatAppt)
+      .patch('http://localhost:8080/patients/' + this.pat?.id, updatePatAppt)
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
   }
@@ -249,7 +249,7 @@ export class UiService {
       this.currentUser.availability, this.currentUser.appointments, 
       this.currentUser.username, this.currentUser.password)
     this.http
-      .patch('http://localhost:3000/patients/' + this.currentUser?.id, updatePatAppts)
+      .patch('http://localhost:8080/patients/' + this.currentUser?.id, updatePatAppts)
       .pipe(take(1))
       .subscribe(() => this.updatePatients())
 
@@ -266,7 +266,7 @@ export class UiService {
       this.doc.availability, this.doc.appointments, 
       this.doc.username, this.doc.password)
     this.http
-      .patch('http://localhost:3000/doctors/' + this.doc?.id, updatedocAppts)
+      .patch('http://localhost:8080/doctors/' + this.doc?.id, updatedocAppts)
       .pipe(take(1))
       .subscribe(() => this.updateDoctors())
 
